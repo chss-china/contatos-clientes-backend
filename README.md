@@ -25,6 +25,10 @@
   - e por fim crio cliente com TypeORM, salvo no banco de dados com todos os dados validados no retorno da requisição usando zod para schema
   -  retorno o status 201 de create com os novos dados.
 
+- GET
+  - listo todos clientes com dados validados usando zod na resposta da requisição, retorno o status 200 com todos clientes
+     
+
 
 
 
