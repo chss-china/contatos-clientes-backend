@@ -20,13 +20,23 @@
     
 # Endpoint para /clients
 - POST
-  - verifico se os dados da requisição estão validados com um schema usando zod
+  - verifico se os dados da requisição estão validados com um schema usando zod para enviar os dados corretos e retornar os dados coretos
   - verifico se o email que enviei na requisição já existe no meu banco de dados, caso exista retorne um erro personalizado, pois não pode cadastrar dois emails iguais
   - e por fim crio cliente com TypeORM, salvo no banco de dados com todos os dados validados no retorno da requisição usando zod para schema
   -  retorno o status 201 de create com os novos dados.
 
 - GET
   - listo todos clientes com dados validados usando zod na resposta da requisição, retorno o status 200 com todos clientes
+ 
+# Endpoint para /clients/id
+ - PATCH
+    - verifico se o cliente tem o id que enviei na url na requisição no meu banco de dados com typeORM, caso não tenha vai estourar um erro personalizado dizendo que o id que enviei não existe, pois não posso atualizar um id que não exista
+    - verifico se o email que enviei na requisição já existe no meu banco de dados, caso exista retorne um erro personalizado, pois não pode cadastrar dois emails iguais
+    -  verifico se os dados da requisição estão validados com um schema usando zod para enviar os dados corretos e retornar os dados coretos, e como e uma atualização os dados são opcionais podendo atualizar apenas dados que quero
+    -  acesso o token do cliente logado, verifico se o cliente está enviando algum token se não vai estourar um erro personalizado pois na
+   rota de atualização precisa estar logado, verifico se o token do cliente logado está no formato do proprio cliente logado, faço uma verificação com jsonwebtoken passando o token e meu secret key que está .env, e também faço uma verificação que se ocorrer um erro de  por exemplo token invalido ou token expirado,ou algum outro, estoura o status 401 com erro personalizado, já se aplicação for bem sucedida
+eu armazeno esse token para usar em varios lugares da aplicação que precisa do usuario logado
+    -
      
 
 
