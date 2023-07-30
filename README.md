@@ -17,7 +17,7 @@
 13. Importar o `reflect-metadata` no arquivo principal `app.ts`.
 14. Se você tiver um clone do projeto, por último, execute `npm install` para instalar todas dependências do projeto. Se for um projeto do começo, após fazer as configurações, vá instalando as bibliotecas que você vai precisar.
 
-
+#
 
 
 
