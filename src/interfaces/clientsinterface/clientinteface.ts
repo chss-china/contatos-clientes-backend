@@ -12,6 +12,11 @@ type TclientResponse = z.infer<typeof clientSchemaResponse>;
 type Tclient = z.infer<typeof createClientSchema>;
 type TclientUpdateRequest = DeepPartial<TclientRequest>;
 type TclientGetList = z.infer<typeof allClientSchemaResponseGet>;
+interface TreturnLogin {
+  id: number;
+  fullname: string;
+  email: string;
+}
 
 export {
   TclientUpdateRequest,
@@ -19,4 +24,5 @@ export {
   TclientResponse,
   TclientRequest,
   TclientGetList,
+  TreturnLogin,
 };

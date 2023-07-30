@@ -3,41 +3,34 @@ import { AppError } from "../../errrors";
 import { Contact } from "../../entities/contact.entities";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
-export const updateVerifyNotAdmin = async (
+import { Client } from "../../entities/clientes.entities";
+export const verifyNotAdmin = async (
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  try {
-    const { decoded } = res.locals;
-    const id = parseInt(req.params.id);
+  const decoded = res.locals.decoded;
+  const id = parseInt(req.params.id);
 
-    const contactRepository: Repository<Contact> =
-      AppDataSource.getRepository(Contact);
-
-    const contact: Contact | null = await contactRepository.findOne({
-      relations: {
-        client: true,
-      },
-      where: { id: id },
-    });
-
-    if (!contact) {
-      throw new AppError("Contact not found", 404);
-    }
-
-    // Assuming decoded.sub contains the client ID of the logged-in user
-    if (
-      decoded.admin === false &&
-      parseInt(decoded.sub) !== contact.client.id
-    ) {
-      throw new AppError("Insufficient permission", 403);
-    }
-
-    // If the user has permission, continue to the next middleware or route handler
-    next();
-  } catch (err) {
-    // Handle errors by passing them to the error-handling middleware
-    next(err);
+  const clientRepository: Repository<Client> =
+    AppDataSource.getRepository(Client);
+  if (!decoded || !decoded.sub) {
+    throw new AppError("Authentication required", 401);
   }
+
+  // Procura o cliente no repositório com o ID fornecido nos parâmetros da URL
+  const client = await clientRepository.findOneBy({ id: id });
+
+  if (!client) {
+    throw new AppError("Client not found", 404);
+  }
+  console.log(client.admin);
+  console.log(client.id);
+  console.log(decoded.sub);
+
+  if (!(client.admin || !decoded.sub || !client.id)) {
+    throw new AppError("Insufficient permission", 403);
+  }
+
+  await clientRepository.save(client);
 };

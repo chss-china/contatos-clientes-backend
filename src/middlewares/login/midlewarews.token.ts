@@ -7,20 +7,28 @@ export const verifyTokenValidMidd = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  let token = req.headers.authorization;
+  const token = req.headers.authorization;
+
   if (!token) {
-    throw new AppError("Invalid credentials", 401);
+    throw new AppError("Missing bearer token", 401);
   }
-  token = token.split(" ")[1];
-  jwt.verify(token, process.env.SECRET_KEY!, (err: any, decoded: any) => {
+
+  const tokenBearer = token.split(" ");
+
+  if (tokenBearer.length !== 2 || tokenBearer[0] !== "Bearer") {
+    throw new AppError("Invalid bearer token format", 401);
+  }
+
+  const tokenValue = tokenBearer[1];
+
+  jwt.verify(tokenValue, process.env.SECRET_KEY!, (err: any, decoded: any) => {
     if (err) {
       throw new AppError(err.message, 401);
     }
 
-    res.locals = {
-      decoded,
-      ...res.locals,
-    };
+    // Adicionar as informações decodificadas do cliente em res.locals
+    res.locals.decoded = decoded;
+
     return next();
   });
 };

@@ -9,6 +9,8 @@ import { createClientService } from "../../services/clients/createclientservices
 import { Request, Response } from "express";
 import { deleteClientService } from "../../services/deleteservices";
 import { updateListService } from "../../services/clients/updateservices";
+import { listClientContactsServiceId } from "../../services/services/clientsandcontacts/clientsandcontactsId.service";
+import { listClientServiceId } from "../../services/clients/clientservices.id";
 export const createClientControllers = async (
   req: Request,
   res: Response
@@ -23,6 +25,14 @@ export const listClientControllers = async (
 ): Promise<Response> => {
   const listClient: TclientResponse[] = await listClientService();
   return res.status(200).json(listClient);
+};
+export const listClientControllersId = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const id: number = parseInt(req.params.id);
+  const listClientId: TclientResponse = await listClientServiceId(id);
+  return res.status(200).json(listClientId);
 };
 export const updateListControllers = async (
   req: Request,

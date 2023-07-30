@@ -13,11 +13,10 @@ import {
 import { verifyEmailMidd } from "../../../middlewares/clients/midlewareverififyemail";
 import { verifyZipCodeMidd } from "../../../middlewares/contacts/middlewareveriffyzipcode";
 import { verifyEmailMiddZiP } from "../../../middlewares/contacts/middlewareverifyemail";
-import { verifyIdMiddContact } from "../../../middlewares/clients/midlewaresverifyid";
 import { verifyTokenValidMidd } from "../../../middlewares/login/midlewarews.token";
-import { updateVerifyNotAdmin } from "../../../middlewares/clients/midlewareAdmin";
+//import { updateVerifyNotAdmin } from "../../../middlewares/clients/midlewareAdmin";
 import { updateListControllers } from "../../../controllers/clients/client.controller";
-import { verifyIdMidd } from "../../../middlewares/clients/midlewareverifyidexists";
+import { verifyIdMiddContact } from "../../../middlewares/clients/midlewaresverifyid";
 export const contactRoutes: Router = Router();
 contactRoutes.post(
   "",
@@ -29,19 +28,19 @@ contactRoutes.post(
 );
 contactRoutes.patch(
   "/:id",
-  verifyIdMidd,
+  verifyIdMiddContact,
   verifyBodyValid(updateContactSchemaRequest),
   verifyEmailMiddZiP,
   verifyZipCodeMidd,
   verifyTokenValidMidd,
-  updateVerifyNotAdmin,
+  //updateVerifyNotAdmin,
   updateContactControllers
 );
 contactRoutes.get("", listContactControllers);
 contactRoutes.delete(
   "/:id",
-  verifyIdMidd,
+  verifyIdMiddContact,
   verifyTokenValidMidd,
-  updateVerifyNotAdmin,
+  //updateVerifyNotAdmin,
   deleteContactControllers
 );

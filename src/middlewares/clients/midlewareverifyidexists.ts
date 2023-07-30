@@ -4,21 +4,21 @@ import { AppDataSource } from "../../data-source";
 import { Client } from "../../entities/clientes.entities";
 import { AppError } from "../../errrors";
 import { Contact } from "../../entities/contact.entities";
-export async function verifyIdMidd(
+export async function verifyIdMiddclient(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  const contactRepository: Repository<Contact> =
-    AppDataSource.getRepository(Contact);
+  const clientRepository: Repository<Client> =
+    AppDataSource.getRepository(Client);
   const id: number = parseInt(req.params.id);
 
-  const contact: Contact | null = await contactRepository.findOne({
+  const client: Client | null = await clientRepository.findOne({
     where: { id: id },
   });
 
-  if (!contact) {
-    throw new AppError("Contact not found", 404);
+  if (!client) {
+    throw new AppError("Client not found", 404);
   }
 
   next();

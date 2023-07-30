@@ -4,7 +4,7 @@ const createClientSchema = z.object({
   fullname: z.string().max(45),
   email: z.string().max(45).email(),
   telephone: z.string().min(10),
-  admin: z.boolean().default(false),
+  admin: z.boolean(),
   password: z.string().max(120),
   createdAt: z.union([z.string(), z.date()]),
 });

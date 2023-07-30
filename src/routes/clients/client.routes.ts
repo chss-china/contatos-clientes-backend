@@ -3,6 +3,7 @@ import {
   createClientControllers,
   deleteListControllers,
   listClientControllers,
+  listClientControllersId,
   updateListControllers,
 } from "../../controllers/clients/client.controller";
 import { verifyBodyValid } from "../../middlewares/clients/midlwareverifibody";
@@ -11,9 +12,11 @@ import {
   updateClientSchemaRequest,
 } from "../../schemas/schemasclients/schemaclients";
 import { verifyEmailMidd } from "../../middlewares/clients/midlewareverififyemail";
-import { verifyIdMidd } from "../../middlewares/clients/midlewareverifyidexists";
+import { verifyIdMiddClient } from "../../middlewares/clientsandcontacts/middlewareverifyIdclientescontacts";
 import { verifyTokenValidMidd } from "../../middlewares/login/midlewarews.token";
-import { updateVerifyNotAdmin } from "../../middlewares/clients/midlewareAdmin";
+
+import { verifyIdMiddclient } from "../../middlewares/clients/midlewareverifyidexists";
+import { verifyNotAdmin } from "../../middlewares/clients/midlewareAdmin";
 export const clientRoutes: Router = Router();
 
 clientRoutes.post(
@@ -24,17 +27,20 @@ clientRoutes.post(
 );
 clientRoutes.patch(
   "/:id",
-  verifyIdMidd,
+  verifyIdMiddclient,
+  verifyEmailMidd,
   verifyBodyValid(updateClientSchemaRequest),
   verifyTokenValidMidd,
-  updateVerifyNotAdmin,
+  verifyNotAdmin,
   updateListControllers
 );
 clientRoutes.get("", listClientControllers);
+//parei nesse get sem o id terminar amanhã
+clientRoutes.get("/:id", verifyIdMiddclient, listClientControllersId);
 clientRoutes.delete(
   "/:id",
-  verifyIdMidd,
+  verifyIdMiddclient,
   verifyTokenValidMidd,
-  updateVerifyNotAdmin,
+  //VerifyNotAdmin,
   deleteListControllers
 );

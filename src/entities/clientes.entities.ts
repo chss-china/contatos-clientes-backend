@@ -27,7 +27,7 @@ class Client {
   @Column({ type: "varchar", length: 120 })
   password: string;
 
-  @Column({ default: false })
+  @Column()
   admin: boolean;
 
   @Column({ type: "text" })

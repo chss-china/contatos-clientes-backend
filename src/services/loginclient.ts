@@ -1,4 +1,3 @@
-import { Repository } from "typeorm";
 import {
   TloginRequest,
   TtokenLoginResponse,
@@ -9,9 +8,16 @@ import { AppError } from "../errrors";
 import { compare } from "bcryptjs";
 import * as jwt from "jsonwebtoken";
 import "dotenv/config";
+import {
+  TclientResponse,
+  TreturnLogin,
+} from "../interfaces/clientsinterface/clientinteface";
+// Importe a interface LoggedInClient que você criou
+import { Admin, Repository } from "typeorm";
+
 export const createLoginService = async (
   loginData: TloginRequest
-): Promise<TtokenLoginResponse> => {
+): Promise<{ token: string; client: TreturnLogin }> => {
   const clientRepository: Repository<Client> =
     AppDataSource.getRepository(Client);
   const client: Client | null = await clientRepository.findOne({
@@ -23,7 +29,7 @@ export const createLoginService = async (
     throw new AppError("Invalid credentials", 401);
   }
 
-  var passwordMatch = await compare(loginData.password, client.password);
+  const passwordMatch = await compare(loginData.password, client.password);
 
   if (!passwordMatch) {
     throw new AppError("Invalid credentials2", 401);
@@ -32,6 +38,7 @@ export const createLoginService = async (
   const token: string = jwt.sign(
     {
       admin: client.admin,
+      client: client.id,
     },
     String(process.env.SECRET_KEY!),
     {
@@ -39,5 +46,15 @@ export const createLoginService = async (
       subject: String(client.id),
     }
   );
-  return { token };
+
+  // Crie um objeto com os dados do cliente que deseja retornar
+  const loggedInClient: TreturnLogin = {
+    id: client.id,
+    fullname: client.fullname,
+    email: client.email,
+    // Outros campos...
+  };
+
+  // Retorne o token e os dados do cliente
+  return { token, client: loggedInClient };
 };
