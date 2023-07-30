@@ -23,7 +23,7 @@
   1. verifico se o dados da requisição está validado com um schema usando zod
   2. verifico se o email que enviei na requisição já existe no meu banco de dados, caso exista retorne um erro personalizado pois não pode cadastrar dois emails iguais
   3.  e por fim crio cliente com typeORM salvo no banco de dados com todos dados validados no retorno da requisição usando zod para schema
-  4.  retorno o status 201 de create com os novos dados
+  4.  retorno o status 201 de create com os novos dados.
 
 
 
