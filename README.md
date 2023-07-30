@@ -16,8 +16,8 @@
 12. E nesse `.then`, com `app.listen`, iniciar o servidor no localhost que quiser e dar um `console.log` para ver se o servidor foi iniciado.
 13. Importar o `reflect-metadata` no arquivo principal `app.ts`.
 14. Se você tiver um clone do projeto, por último, execute `npm install` para instalar todas dependências do projeto. Se for um projeto do começo, após fazer as configurações, vá instalando as bibliotecas que você vai precisar.
-
-#
+15.  15. Habilitar o CORS no projeto para vincular com o front-end, permitindo a comunicação segura entre os domínios do back-end e do front-end.
+    
 
 
 
