@@ -20,17 +20,18 @@ export const verifyNotAdmin = async (
 
   // Procura o cliente no repositório com o ID fornecido nos parâmetros da URL
   const client = await clientRepository.findOneBy({ id: id });
+  const loggedClient = await clientRepository.findOneBy({ id: decoded.client });
 
   if (!client) {
     throw new AppError("Client not found", 404);
   }
-  console.log(client.admin);
-  console.log(client.id);
-  console.log(decoded.sub);
 
-  if (!(client.admin || !decoded.sub || !client.id)) {
+  const isSelfUpdated = loggedClient?.id === client.id;
+
+  if (!loggedClient?.admin && !isSelfUpdated) {
     throw new AppError("Insufficient permission", 403);
   }
 
   await clientRepository.save(client);
+  next();
 };

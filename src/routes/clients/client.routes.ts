@@ -41,6 +41,6 @@ clientRoutes.delete(
   "/:id",
   verifyIdMiddclient,
   verifyTokenValidMidd,
-  //VerifyNotAdmin,
+  verifyNotAdmin,
   deleteListControllers
 );

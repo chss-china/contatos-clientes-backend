@@ -49,6 +49,7 @@ export const createLoginService = async (
 
   // Crie um objeto com os dados do cliente que deseja retornar
   const loggedInClient: TreturnLogin = {
+    admin: client.admin,
     id: client.id,
     fullname: client.fullname,
     email: client.email,
