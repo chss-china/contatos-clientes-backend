@@ -103,7 +103,7 @@ node_modules
    - Por fim, procuro o ID do cliente que enviei na URL, o qual está presente no meu banco de dados, para buscar o ID do cliente que desejo deletar. Use o TypeORM para realizar a remoção e retornar o status 204, sem fornecer a resposta da requisição com os dados que foram excluídos.
  .
 # Endpoint para /login
-- POST
+ - POST
     - fiz uma função que faz o login que é realizada uma consulta no banco de dados para encontrar um cliente com o email fornecido na  no corpo ao enviar requisição.
     - Se nenhum cliente for encontrado com o e-mail fornecido, a função lança um erro usando a classe de erro personalizado com  a mensagem "Invalid credenciais" e o código de status HTTP 401 (Unauthorized). isso é feito para verificar se o email que passei no login é valido ou existe
    - Se um cliente for encontrado com o e-mail fornecido, a função compara a senha posicionada no com os dados da requisição a senha armazenada no registro do cliente no banco de dados
