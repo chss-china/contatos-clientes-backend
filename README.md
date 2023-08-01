@@ -46,37 +46,51 @@ node_modules
     
 # Endpoint para /clients
 - POST
-  - verifico se os dados da requisição estão validados com um schema usando zod para enviar os dados corretos e retornar os dados coretos
-  - verifico se o email que enviei na requisição já existe no meu banco de dados, caso exista retorne um erro personalizado, pois não pode cadastrar dois emails iguais
-  - e por fim crio cliente com TypeORM, salvo no banco de dados com todos os dados validados no retorno da requisição usando zod para schema
-  -  retorno o status 201 de create com os novos dados.
+  -  Verifico se os dados da requisição estão validados com um esquema usando Zod para enviar os dados corretos e retornar os dados corretos.
+  - Verifico se o e-mail enviado na requisição já existe no meu banco de dados. Caso exista, retorno um erro personalizado, pois não é possível cadastrar dois e-mails iguais.
+  - Por fim, crio um cliente com TypeORM e salvo no banco de dados com todos os dados validados no retorno da requisição, utilizando Zod para o schema.
+  -  Retorno o status 201 de "created" com os novos dados.
 
 - GET
   - listo todos clientes com dados validados usando zod na resposta da requisição, retorno o status 200 com todos clientes
  
 # Endpoint para /clients/id
  - PATCH
-    - verifico se o cliente tem o id que enviei na url na requisição no meu banco de dados com typeORM, caso não tenha vai estourar um erro personalizado dizendo que o id que enviei não existe, pois não posso atualizar um id que não exista
-    - verifico se o email que enviei na requisição já existe no meu banco de dados, caso exista retorne um erro personalizado, pois não pode cadastrar dois emails iguais
-    -  verifico se os dados da requisição estão validados com um schema usando zod para enviar os dados corretos e retornar os dados coretos, e como e uma atualização os dados são opcionais podendo atualizar apenas dados que quero
-    -  acesso o token do cliente logado, verifico se o cliente está enviando algum token se não vai estourar um erro personalizado pois na
-   rota de atualização precisa estar logado, verifico se o token do cliente logado está no formato do proprio cliente logado, faço uma verificação com jsonwebtoken passando o token e meu secret key que está .env, e também faço uma verificação que se ocorrer um erro de  por exemplo token invalido ou token expirado,ou algum outro, estoura o status 401 com erro personalizado, já se aplicação for bem sucedida
-eu armazeno esse token para usar em varios lugares da aplicação que precisa do usuario logado
-    - faço uma verificação se o usuario logado é dono das sua própria informações ou se ele é admin, por que caso seja admin pode deletar e ecluir qualquer cliente, se não for admin só exui os dados do proprio usuario logado
-    - faço a atualização dos dados procurando o dado pelo id e retornando e criando esse novo dado com os dados da requisição que passamos
-com todos dados validados no usando schema do zod tanto na requisição quanto na resposta da requisição
+    - Verifico se o cliente possui o ID enviado na URL da requisição no meu banco de dados com o TypeORM. Caso não exista, retornarei um erro personalizado informando que o ID enviado não existe, pois não posso atualizar um registro que não existe.
+    - Verifico se o e-mail enviado na requisição já existe no meu banco de dados. Caso exista, retorno um erro personalizado, pois não é possível cadastrar dois e-mails iguais.
+    -  Verifico se os dados da requisição estão validados com um esquema usando o Zod para enviar os dados corretos e retornar os dados corretos. Como se trata de uma atualização, os dados são permitidos, permitindo atualizar apenas os campos desejados.
+    - Acesso ao token: Ao receber uma requisição de atualização de cliente, o servidor acessa o token que está presente nos cabeçalhos (headers) da requisição. O token geralmente é enviado pelo cliente como uma forma de autenticação.
+
+    - Verificação da presença do token: O servidor verifica se o token está presente na requisição. Se não houver um token válido, o servidor retornará um erro personalizado com status 401 (não autorizado), informando que é necessário estar autenticado para acessar uma rota de atualização.
+
+     - Validação do token: O servidor valida o token usando a biblioteca jsonwebtoken. O token é verificado em relação a uma chave secreta (chave secreta) armazenada no arquivo .envdo servidor. Isso garante que o token não foi manipulado e que pertence a um usuário autenticado.
+
+     - Tratamento de erros: Se ocorrer algum problema na validação do token, como um token inválido, expirado ou interrompido, o servidor retornará um erro personalizado com status 401, informando que o token é inválido ou expirado.
+
+      - armazenamento do token: Se a validação do token for bem-sucedida, o servidor armazena o token para usar em outros lugeres da aplicação
+
+      - Faça uma verificação para determinar se o usuário logado é o dono de suas próprias informações ou se ele é um administrador, pois caso seja um administrador, ele pode atualizar  e excluir qualquer cliente. Se não for um administrador, apenas os dados do próprio usuário logado serão excluídos ou atualizados.
+
+
 
 - GET
-   - verifico se o cliente tem o id que enviei na url na requisição no meu banco de dados com typeORM, caso não tenha vai estourar um erro personalizado dizendo que o id que enviei não existe, pois não posso atualizar um id que não exista
-   -  listo cliente que tem o id que passei na url com dados validados usando zod na resposta da requisição, retorno o status 200 com todos clientes
+   -  Verifico se o cliente possui o ID enviado na URL da requisição no meu banco de dados com o TypeORM. Caso não exista, retornarei um erro personalizado informando que o ID enviado não existe, pois não posso listar um registro que não existe.
+   -  Listo o cliente que possui o ID fornecido na URL, com os dados validados usando Zod na resposta da requisição. Retorno ao status 200 com todos os clientes encontrados.
  
 - DELETE
-     - verifico se o cliente tem o id que enviei na url na requisição no meu banco de dados com typeORM, caso não tenha vai estourar um erro personalizado dizendo que o id que enviei não existe, pois não posso atualizar um id que não exista
-     - acesso o token do cliente logado, verifico se o cliente está enviando algum token se não vai estourar um erro personalizado pois na
- rota de atualização precisa estar logado, verifico se o token do cliente logado está no formato do proprio cliente logado, faço uma verificação com jsonwebtoken passando o token e meu secret key que está .env, e também faço uma verificação que se ocorrer um erro de  por exemplo token invalido ou token expirado,ou algum outro, estoura o status 401 com erro personalizado, já se aplicação for bem sucedida
-eu armazeno esse token para usar em varios lugares da aplicação que precisa do usuario logado
-   - por fim procuro o id do cliente que enviei na url que tem no meu banco de dadso para buscar o id do cliente
- quero deletar e faço o remove com TypeORM retornando o status 204 sem a resposta da requisição com os dados que foram deletados
+     - Verifico se o cliente possui o ID enviado na URL da requisição no meu banco de dados com o TypeORM. Caso não exista, retornarei um erro personalizado informando que o ID enviado não existe, pois não posso deletar um registro que não existe.
+     -  Acesso ao token: Ao receber uma requisição de atualização de cliente, o servidor acessa o token que está presente nos cabeçalhos (headers) da requisição. O token geralmente é enviado pelo cliente como uma forma de autenticação.
+     -  Verificação da presença do token: O servidor verifica se o token está presente na requisição. Se não houver um token válido, o servidor retornará um erro personalizado com status 401 (não autorizado), informando que é necessário estar autenticado para acessar uma rota de atualização
+    - Validação do token: O servidor valida o token usando a biblioteca jsonwebtoken. O token é verificado em relação a uma chave secreta
+ (chave secreta) armazenada no arquivo .envdo servidor. Isso garante que o token não foi manipulado e que pertence a um usuário autenticado.
+    - armazenamento do token: Se a validação do token for bem-sucedida, o servidor armazena o token para usar em outros lugeres da aplicação
+    - Tratamento de erros: Se ocorrer algum problema na validação do token, como um token inválido, expirado ou interrompido, o servidor retornará um erro personalizado com status 401, informando que o token é inválido ou expirado.
+    -  Faço uma verificação para determinar se o usuário logado é o dono de suas próprias informações ou se ele é um administrador, pois caso seja um administrador, ele pode atualizar  e excluir qualquer cliente. Se não for um administrador, apenas os dados do próprio usuário logado serão excluídos ou atualizados
+   - Por fim, procuro o ID do cliente que enviei na URL, o qual está presente no meu banco de dados, para buscar o ID do cliente que desejo deletar. Use o TypeORM para realizar a remoção e retornar o status 204, sem fornecer a resposta da requisição com os dados que foram excluídos.
+ .
+
+
+
      
 
 
