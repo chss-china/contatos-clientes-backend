@@ -104,6 +104,7 @@ node_modules
  .
 # Endpoint para /login
  - POST
+   
     - fiz uma função que faz o login que é realizada uma consulta no banco de dados para encontrar um cliente com o email fornecido na  no corpo ao enviar requisição.
       
     - Se nenhum cliente for encontrado com o e-mail fornecido, a função lança um erro usando a classe de erro personalizado com  a mensagem "Invalid credenciais" e o código de status HTTP 401 (Unauthorized). isso é feito para verificar se o email que passei no login é valido ou existe
@@ -116,7 +117,7 @@ node_modules
       
     - Antes de retornar os dados,eu crio o codigo que  cria um objeto loggedInClientcom algumas informações relevantes do cliente, como admin, id, fullnamee email. Essas informações serão retornadas juntamente com o token, para quando for fazer requisição no front end retorna o token e o usuario logado e assim manipular o front end
       
-    - por fim é retornado o token com as informações do cliente usando status 201 de created
+  - por fim é retornado o token com as informações do cliente usando status 201 de created
      
      
      
