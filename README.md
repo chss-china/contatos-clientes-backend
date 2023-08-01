@@ -62,7 +62,21 @@ node_modules
     -  acesso o token do cliente logado, verifico se o cliente está enviando algum token se não vai estourar um erro personalizado pois na
    rota de atualização precisa estar logado, verifico se o token do cliente logado está no formato do proprio cliente logado, faço uma verificação com jsonwebtoken passando o token e meu secret key que está .env, e também faço uma verificação que se ocorrer um erro de  por exemplo token invalido ou token expirado,ou algum outro, estoura o status 401 com erro personalizado, já se aplicação for bem sucedida
 eu armazeno esse token para usar em varios lugares da aplicação que precisa do usuario logado
-    -
+    - faço uma verificação se o usuario logado é dono das sua própria informações ou se ele é admin, por que caso seja admin pode deletar e ecluir qualquer cliente, se não for admin só exui os dados do proprio usuario logado
+    - faço a atualização dos dados procurando o dado pelo id e retornando e criando esse novo dado com os dados da requisição que passamos
+com todos dados validados no usando schema do zod tanto na requisição quanto na resposta da requisição
+
+- GET
+   - verifico se o cliente tem o id que enviei na url na requisição no meu banco de dados com typeORM, caso não tenha vai estourar um erro personalizado dizendo que o id que enviei não existe, pois não posso atualizar um id que não exista
+   -  listo cliente que tem o id que passei na url com dados validados usando zod na resposta da requisição, retorno o status 200 com todos clientes
+ 
+- DELETE
+     - verifico se o cliente tem o id que enviei na url na requisição no meu banco de dados com typeORM, caso não tenha vai estourar um erro personalizado dizendo que o id que enviei não existe, pois não posso atualizar um id que não exista
+     - acesso o token do cliente logado, verifico se o cliente está enviando algum token se não vai estourar um erro personalizado pois na
+ rota de atualização precisa estar logado, verifico se o token do cliente logado está no formato do proprio cliente logado, faço uma verificação com jsonwebtoken passando o token e meu secret key que está .env, e também faço uma verificação que se ocorrer um erro de  por exemplo token invalido ou token expirado,ou algum outro, estoura o status 401 com erro personalizado, já se aplicação for bem sucedida
+eu armazeno esse token para usar em varios lugares da aplicação que precisa do usuario logado
+   - por fim procuro o id do cliente que enviei na url que tem no meu banco de dadso para buscar o id do cliente
+ quero deletar e faço o remove com TypeORM retornando o status 204 sem a resposta da requisição com os dados que foram deletados
      
 
 
