@@ -15,7 +15,7 @@
 12. Para iniciar o Data Source, use o método `initialize` e utilize `.then` para mostrar `console.log` do database conectado.
 13. E nesse `.then`, com `app.listen`, iniciar o servidor no localhost que quiser e dar um `console.log` para ver se o servidor foi iniciado.
 14. Importar o `reflect-metadata` no arquivo principal `app.ts`.
-15. Se você tiver um clone do projeto, por último, execute `npm install` para instalar todas dependências do projeto. Se for um projeto do começo, após fazer as configurações, vá instalando as bibliotecas que você vai precisar.
+15. Se você tiver um clone do projeto, por último, execute `npm install` para instalar todas dependências do projeto. Se for um projeto do começo, após fazer as configurações, vá instalando as bibliotecas que você vai precisar. Mais se for um clone do projeto execute npm install, se necesssario entrar na pasta para dar o comando, e por ultimo npm run dev para executar o servidor 
 16. Habilitar o CORS no projeto para vincular com o front-end, permitindo a comunicação segura entre os domínios do back-end e do front-end.
 17.  Em seguida, gere o arquivo tsconfig.json para personalizar como o TypeScript compila e trata o código do seu projeto. Execute o comando npx tsc --init
 18.   O arquivo `tsconfig.json` sera gerado com configurações padrão. Mais configurações adicionais podem ser feitas neste arquivo. Veja abaixo todas as configurações que fiz no arquivo `tsconfig.json`. Lembre-se de que essas configurações são opcionais e foram escolhidas de acordo com minhas preferências:
