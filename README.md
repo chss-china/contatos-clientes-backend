@@ -92,7 +92,7 @@ node_modules
      -  Verificação da presença do token: O servidor verifica se o token está presente na requisição. Se não houver um token válido, o servidor retornará um erro personalizado com status 401 (não autorizado), informando que é necessário estar autenticado para acessar uma rota de atualização
   
     - Validação do token: O servidor valida o token usando a biblioteca jsonwebtoken. O token é verificado em relação a uma chave secreta
- (chave secreta) armazenada no arquivo .envdo servidor. Isso garante que o token não foi manipulado e que pertence a um usuário autenticado.
+ (chave secreta) armazenada no arquivo .env do servidor. Isso garante que o token não foi manipulado e que pertence a um usuário autenticado.
 
     - armazenamento do token: Se a validação do token for bem-sucedida, o servidor armazena o token para usar em outros lugeres da aplicação
   
@@ -102,9 +102,17 @@ node_modules
       
    - Por fim, procuro o ID do cliente que enviei na URL, o qual está presente no meu banco de dados, para buscar o ID do cliente que desejo deletar. Use o TypeORM para realizar a remoção e retornar o status 204, sem fornecer a resposta da requisição com os dados que foram excluídos.
  .
-
-
-
+# Endpoint para /login
+ -POST
+   - fiz uma função que faz o login que é realizada uma consulta no banco de dados para encontrar um cliente com o email fornecido na  no corpo ao enviar requisição.
+   - Se nenhum cliente for encontrado com o e-mail fornecido, a função lança um erro usando a classe de erro personalizado com  a mensagem "Invalid credenciais" e o código de status HTTP 401 (Unauthorized). isso é feito para verificar se o email que passei no login é valido ou existe
+   - Se um cliente for encontrado com o e-mail fornecido, a função compara a senha posicionada no com os dados da requisição a senha armazenada no registro do cliente no banco de dados
+   - utilizando a função compareda biblioteca bcryptjs. Se as senhas não coincidem, a função lança um erro usando a classe AppError que que é um erro personalizado com a mensagem "Invalid credenciais" e o código de status HTTP 401 (Unauthorized)
+   - : Se as credenciais estiverem corretas, o código utiliza uma biblioteca jsonwebtokenpara gerar um token de autenticação. O token é assinado com informações sobre o cliente, como o ID do cliente e se ele é um administrador ou não. A chave secreta utilizada para assinar o token é submetida à variável de ambiente
+   - : Antes de retornar os dados,eu crio o codigo que  cria um objeto loggedInClientcom algumas informações relevantes do cliente, como admin, id, fullnamee email. Essas informações serão retornadas juntamente com o token, para quando for fazer requisição no front end retorna o token e o usuario logado e assim manipular o front end
+   - por fim é retornado o token com as informações do cliente usando status 201 de created
+   -  
+     
      
 
 
