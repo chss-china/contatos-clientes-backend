@@ -1,6 +1,6 @@
 
 # TypeOrm + Express + React + Vite + Typescript
-- Back End do meu projeto Full Stack
+- Back End do meu projeto Full Stack,
 # Comandos para instalação e Configuração
 1. `npm init -y` para instalar aplicação com Node.js.
 2. `npm install typeorm reflect-metadata @nestjs/typeorm pg` para instalar o back end com suporte ao PostgreSQL.
