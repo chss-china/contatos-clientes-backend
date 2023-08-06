@@ -34,9 +34,9 @@ clientRoutes.patch(
   verifyNotAdmin,
   updateListControllers
 );
-clientRoutes.get("", listClientControllers);
-//parei nesse get sem o id terminar amanhã
+
 clientRoutes.get("/:id", verifyIdMiddclient, listClientControllersId);
+clientRoutes.get("", listClientControllers);
 clientRoutes.delete(
   "/:id",
   verifyIdMiddclient,

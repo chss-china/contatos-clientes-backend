@@ -26,6 +26,7 @@ const contactSchemaResponseUpdate = ContactSchema.omit({
 const contactSchemaRequest = ContactSchema.omit({
   id: true,
   createdAt: true,
+  admin: true,
 });
 const updateContactSchemaRequest = ContactSchema.omit({
   id: true,

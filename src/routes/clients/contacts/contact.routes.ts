@@ -17,6 +17,9 @@ import { verifyTokenValidMidd } from "../../../middlewares/login/midlewarews.tok
 //import { updateVerifyNotAdmin } from "../../../middlewares/clients/midlewareAdmin";
 import { updateListControllers } from "../../../controllers/clients/client.controller";
 import { verifyIdMiddContact } from "../../../middlewares/clients/midlewaresverifyid";
+import { verifyNotAdmin } from "../../../middlewares/clients/midlewareAdmin";
+import { verifyAdmin } from "../../../middlewares/contacts/middlewareverifyadmin.contact";
+import { VerifyNotAdminContact } from "../../../middlewares/contacts/verifiAdminUpdateContact";
 export const contactRoutes: Router = Router();
 contactRoutes.post(
   "",
@@ -24,6 +27,7 @@ contactRoutes.post(
   verifyEmailMiddZiP,
   verifyZipCodeMidd,
   verifyTokenValidMidd,
+  VerifyNotAdminContact,
   createContactControllers
 );
 contactRoutes.patch(
@@ -33,7 +37,7 @@ contactRoutes.patch(
   verifyEmailMiddZiP,
   verifyZipCodeMidd,
   verifyTokenValidMidd,
-  //updateVerifyNotAdmin,
+  VerifyNotAdminContact,
   updateContactControllers
 );
 contactRoutes.get("", listContactControllers);
@@ -41,6 +45,6 @@ contactRoutes.delete(
   "/:id",
   verifyIdMiddContact,
   verifyTokenValidMidd,
-  //updateVerifyNotAdmin,
+  VerifyNotAdminContact,
   deleteContactControllers
 );
