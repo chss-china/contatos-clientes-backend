@@ -17,12 +17,12 @@ faça o clone do repositorio execute npm install,  entre na pasta com comando cd
  e execute o servidor com npm run dev
 
 # Conectar ao banco de dados
-DATABASE_URL="postgres://Username:Password@host:port/database"
-SECRET_KEY:a que voce quiser
+ - DATABASE_URL="postgres://Username:Password@host:port/database"
+ - SECRET_KEY:a que voce quiser
 
 # Rodar migrations
-npm run typeorm migration:generate -- -d src/data-source src/migrations/createTables2
-npm run typeorm migration:run -- -d src/data-source
+- npm run typeorm migration:generate -- -d src/data-source src/migrations/createTables2
+- npm run typeorm migration:run -- -d src/data-source
 # Endpoint para /clients
 - POST
   -  Verifico se os dados da requisição estão validados com um esquema usando Zod para enviar os dados corretos e retornar os dados corretos.
