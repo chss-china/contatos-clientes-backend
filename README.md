@@ -1,6 +1,9 @@
 
 # TypeOrm + Express + React + Vite + Typescript
 - Back End do meu projeto Full Stack, o Objetivo do projeto foi desenvolver um back para um serviço responsavel por simular agenda podendo adicionar e remover contatos e clientes. Prazo do projeto full stack foi de 5 dias
+
+# EU AINDA NÃO TERMINEI O PROJETO
+
 # Tecnologias e Bibliotecas
 - Node
 - Express
