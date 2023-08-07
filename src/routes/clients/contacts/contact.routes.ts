@@ -34,8 +34,6 @@ contactRoutes.patch(
   "/:id",
   verifyIdMiddContact,
   verifyBodyValid(updateContactSchemaRequest),
-  verifyEmailMiddZiP,
-  verifyZipCodeMidd,
   verifyTokenValidMidd,
   VerifyNotAdminContact,
   updateContactControllers
