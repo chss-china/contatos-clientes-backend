@@ -16,8 +16,8 @@
 - zode
 - ts node
 # Instalação e dependencias
-faça o clone do repositorio execute npm install,  entre na pasta com comando cd contatos-clientes-backend
- e execute o servidor com npm run dev
+faça o clone do repositorio execute `npm install`,  entre na pasta com comando cd contatos-clientes-backend
+ e execute o servidor com `npm run dev`
 
 # Conectar ao banco de dados
  - DATABASE_URL="postgres://Username:Password@host:port/database"
